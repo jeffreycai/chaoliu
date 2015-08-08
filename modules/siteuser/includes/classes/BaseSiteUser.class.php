@@ -5,6 +5,7 @@ include_once MODULESROOT . DS . 'core' . DS . 'includes' . DS . 'classes' . DS .
  * DB fields
  * - id
  * - username
+ * - company_id
  * - email
  * - salt
  * - password
@@ -43,6 +44,12 @@ class BaseSiteUser extends DBObject {
    }
    public function getUsername() {
      return $this->getDbFieldUsername();
+   }
+   public function setCompanyId($var) {
+     $this->setDbFieldCompany_id($var);
+   }
+   public function getCompanyId() {
+     return $this->getDbFieldCompany_id();
    }
    public function setEmail($var) {
      $this->setDbFieldEmail($var);
@@ -108,6 +115,7 @@ class BaseSiteUser extends DBObject {
 CREATE TABLE IF NOT EXISTS `site_user` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(24) NOT NULL UNIQUE ,
+  `company_id` INT ,
   `email` VARCHAR(128) NOT NULL UNIQUE ,
   `salt` VARCHAR(16) NOT NULL ,
   `password` VARCHAR(32) ,
@@ -116,7 +124,13 @@ CREATE TABLE IF NOT EXISTS `site_user` (
   `created_at` INT NOT NULL ,
   `last_login` INT ,
   PRIMARY KEY (`id`)
-)
+ ,
+INDEX `fk-site_user-company_id-idx` (`company_id` ASC),
+CONSTRAINT `fk-site_user-company_id`
+  FOREIGN KEY (`company_id`)
+  REFERENCES `company` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;

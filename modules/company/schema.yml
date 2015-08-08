@@ -1,0 +1,14 @@
+company:
+  pk: id
+  fields:
+    id: INT NOT NULL AUTO_INCREMENT
+    name: VARCHAR(24) NOT NULL UNIQUE
+  form:
+    fields:
+      name:
+        widget: text
+        widget_conf:
+          required: 1
+    names:
+      en: Company
+      zh: 公司

@@ -12,48 +12,49 @@ if (isset($_POST['submit'])) {
   $password_confirm = isset($_POST['password_confirm']) ? strip_tags(trim($_POST['password_confirm'])) : null;
   $roles    = isset($_POST['roles']) && is_array($_POST['roles']) ? $_POST['roles'] : array();
   $noemailnotification = isset($_POST['noemailnotification']) ? true : false;
-  if (is_backend()) {
-    $active   = isset($_POST['active'])   ? strip_tags(trim($_POST['active']))   : null;
-  }
+  $company_id = isset($_POST['company_id']) ? strip_tags(trim($_POST['company_id'])) : null;
+  $active   = isset($_POST['active']) ? strip_tags(trim($_POST['active']))   : false;
   
   // validation
   $messages = array();
   
   // spam token for frontend only
-  if (is_frontend()) {
-    if (module_enabled('form') && !Form::checkSpamToken(SITEUSER_FORM_SPAM_TOKEN)) {
-      $messages[] = new Message(Message::DANGER, i18n(array(
-          'en' => 'Form expired. Please try submit again',
-          'zh' => '表单超时，请重新尝试提交表单'
-      )));
-    }
-  }
+//  if (is_frontend()) {
+//    if (module_enabled('form') && !Form::checkSpamToken(SITEUSER_FORM_SPAM_TOKEN)) {
+//      $messages[] = new Message(Message::DANGER, i18n(array(
+//          'en' => 'Form expired. Please try submit again',
+//          'zh' => '表单超时，请重新尝试提交表单'
+//      )));
+//    }
+//  }
   
   // username
-  if (is_null($username)) {
-    $messages[] = new Message(Message::DANGER, i18n(array(
-        'en' => 'Please enter your username',
-        'zh' => '请填写用户名'
-    )));
-  } else if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-    $messages[] = new Message(Message::DANGER, i18n(array(
-        'en' => 'Username needs to be composed by alphabetically letters or underscore',
-        'zh' => '用户名必须为英文字母或者下划线'
-    )));
-  } else if ($user = SiteUser::findByUsername($username)) {
-    // when create new user, we check if there is an existing one
-    if (empty($uid)) {
+  if (isset($username)) {
+    if (trim($username) == '') {
       $messages[] = new Message(Message::DANGER, i18n(array(
-          'en' => 'This username has already been registered. Please choose a different username',
-          'zh' => '该用户名已被注册，请尝试其他用户名'
+          'en' => 'Please enter your username',
+          'zh' => '请填写用户名'
       )));
-    } else {
-    // when update existing user, we check if the username is duplicated
-      if ($user->getId() != $uid) {
+    } else if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+      $messages[] = new Message(Message::DANGER, i18n(array(
+          'en' => 'Username needs to be composed by alphabetically letters or underscore',
+          'zh' => '用户名必须为英文字母或者下划线'
+      )));
+    } else if ($user = SiteUser::findByUsername($username)) {
+      // when create new user, we check if there is an existing one
+      if (empty($uid)) {
         $messages[] = new Message(Message::DANGER, i18n(array(
             'en' => 'This username has already been registered. Please choose a different username',
             'zh' => '该用户名已被注册，请尝试其他用户名'
         )));
+      } else {
+      // when update existing user, we check if the username is duplicated
+        if ($user->getId() != $uid) {
+          $messages[] = new Message(Message::DANGER, i18n(array(
+              'en' => 'This username has already been registered. Please choose a different username',
+              'zh' => '该用户名已被注册，请尝试其他用户名'
+          )));
+        }
       }
     }
   }
@@ -118,13 +119,26 @@ if (isset($_POST['submit'])) {
   } else {
     $user = empty($uid) ? new SiteUser() : SiteUser::findById($uid);
     
-    $user->setUsername($username);
+    if (isset($username)) {
+      $user->setUsername($username);
+    }
     $user->setEmail($email);
     $user->putPassword($password);
-    if (is_backend()) {
-      $user->setActive(empty($active) ? 0 : 1);
+    
+    // if the updated user is current user, we need to update user session, so that he won't be kicked out
+    if ($_SESSION['siteuser_id'] == $user->getId()) {
+      $_SESSION['siteuser_password'] = $user->getPassword();
+    }
+    
+    if (isset($company_id) && $company_id) {
+      $user->setCompanyId($company_id);
+    }
+
+    if ($active !== false) {
+      $user->setActive($active == "1" ? 1 : 0);
       $user->setEmailActivated(1);
     }
+
     
     // for new user
     if (empty($uid)) {

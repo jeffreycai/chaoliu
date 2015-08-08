@@ -13,26 +13,33 @@ class SiteProfile extends BaseSiteProfile {
     $mandatory_label = ' <span style="color: rgb(185,2,0); font-weight: bold;">*</span>';
     $avatar_field = '
   <div class="form-group" id="form-field-avatar" >
-    <label for="avatar">'.i18n(array('en' => 'Avatar', 'zh' => '头像')).' <small style="font-weight: normal;"><i>('.  i18n(array(
+    <label class="col-sm-2 control-label" for="avatar">'.i18n(array('en' => 'Avatar', 'zh' => '头像')).' <small style="font-weight: normal;"><i>('.  i18n(array(
         'en' => 'optional',
         'zh' => '可选'
     )).')</i></small></label>
     '.( $profile ? "<div><img src='" . $profile->getThumbnailUrl() . "' alt='" . $user->getUsername() . "' style='cursor: pointer;' /></div>" : '').'
-    <input type="file" id="avatar" name="avatar"' .($profile ?  ' style="display: none;"' : '') . ' />
-    <small>'.  i18n(array(
+    <div class="col-sm-10">
+      <input type="file" id="avatar" name="avatar"' .($profile ?  ' style="display: none;"' : '') . ' />
+      <span class="help-block m-b-none"><small>'.  i18n(array(
         'en' => 'Max image file size: ' . round($settings['profile']['avatar_max_size'] / 1000000, 1) . 'MB',
         'zh' => '最大图片上传尺寸： ' . round($settings['profile']['avatar_max_size'] / 1000000, 1) . 'MB'
-    )).'</small>
+    )).'</small></span>
+    </div>
   </div>
 ';
     $rtn = '
   <div class="form-group" id="form-field-nickname">
-    <label for="nickname">'.i18n(array('en' => 'Nick name', 'zh' => '昵称')).$mandatory_label.' <small style="font-weight: normal;"><i>('.i18n(array(
+    <label class="col-sm-2 control-label" for="nickname">'.i18n(array('en' => 'Nick name', 'zh' => '昵称')).$mandatory_label.' </label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="nickname" name="nickname" value="'.$nickname.'" required placeholder="" />
+      <span class="help-block m-b-none"><small style="font-weight: normal;">('.i18n(array(
         'en' => 'what others see you as',
         'zh' => '其他用户看到的您的称呼'
-    )).')</i></small></label>
-    <input type="text" class="form-control" id="nickname" name="nickname" value="'.$nickname.'" required placeholder="" />
-  </div>' . (in_array('avatar', $exclude_fields) ? '' : $avatar_field) . '
+    )).')</small></span>
+    </div>
+  </div>
+  <div class="hr-line-dashed"></div>
+  ' . (in_array('avatar', $exclude_fields) ? '' : $avatar_field) . '
   <script type="text/javascript">
     $("#form-field-avatar img").click(function(){
       $("#avatar").trigger("click");
@@ -67,8 +74,11 @@ class SiteProfile extends BaseSiteProfile {
   }
   
   public function delete() {
+    $settings = Vars::getSettings();
     // we delete avatar image first
-    @unlink(AVATAR_DIR . '/' . $this->getThumbnail());
+    if ($this->getThumbnail() != $settings['profile']['avatar_default']) {
+      @unlink(AVATAR_DIR . '/' . $this->getThumbnail());
+    }
     
     parent::delete();
   }

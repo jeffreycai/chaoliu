@@ -2,6 +2,11 @@
 require_once "BaseSiteRole.class.php";
 
 class SiteRole extends BaseSiteRole {
+  
+  public function __toString() {
+    return $this->getName();
+  }
+  
   public function hasPermission($name) {
     global $mysqli;
     $permission = SitePermission::findByName($name);

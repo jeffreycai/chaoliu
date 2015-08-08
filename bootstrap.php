@@ -12,18 +12,14 @@ if (isset($custom_modules)) {
 
   $enabled_modules = array(
       'core',
-//      'static_cache',
       'database',
       'form',
+      'company',
       'site',
       'siteuser',
       'siteuser_profile',
-      'wechat_account',
       'mail',
-      'crawler',
-      'log',
-      'queue'
-//      'siteuser_wechat_dummy'
+
   );
 
 }
