@@ -73,13 +73,13 @@ INDEX `fk-site_user_role-user_id-idx` (`user_id` ASC),
 CONSTRAINT `fk-site_user_role-user_id`
   FOREIGN KEY (`user_id`)
   REFERENCES `site_user` (`id`)
-  ON DELETE CASCADE
+  ON DELETE CASCADE 
   ON UPDATE CASCADE ,
 INDEX `fk-site_user_role-role_id-idx` (`role_id` ASC),
 CONSTRAINT `fk-site_user_role-role_id`
   FOREIGN KEY (`role_id`)
   REFERENCES `site_role` (`id`)
-  ON DELETE CASCADE
+  ON DELETE CASCADE 
   ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

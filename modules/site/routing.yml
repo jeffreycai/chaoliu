@@ -29,6 +29,27 @@ routing:
     isSecure: 0
     i18n: 0
     controller: site/siteuser_add
+  client_list:
+    path: ^\/client\/list\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/client_list
+  client_add:
+    path: ^\/client\/add\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/client_add
+  client_edit:
+    path: ^\/client\/edit\/(\d+)\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/client_edit
+  client_details:
+    path: ^\/client\/details\/(\d+)\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/client_details
+    
 
 
 assets:
@@ -51,7 +72,7 @@ assets:
         path: .?
         position: top
         weight: 30
-        source: //maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
+        source: ../../original_theme/font-awesome/css/font-awesome.css
       # original
       original:
         path: .?

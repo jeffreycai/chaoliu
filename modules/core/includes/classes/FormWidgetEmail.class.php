@@ -19,13 +19,18 @@ class FormWidgetEmail extends FormWidget {
     $prepopulate_retype = "(isset(\$_POST['retype_$this->name']) ? strip_tags(\$_POST['retype_$this->name']) : '')";
     $rtn .=
 "\n<div class='form-group'>
-  <label for='$this->name'>$this->name</label>
-  <input value='[[[ echo htmlentities(str_replace('\'', '\"', $prepopulate)) ]]]' type='email' class='form-control' id='$this->name' name='$this->name'".($this->required ? ' required' : '').($this->size ? ' size='.$this->size : '')." />
+  <label class='col-sm-2 control-label' for='$this->name'>$this->name ".($this->required ? $this->mandatory_field : '')."</label>
+  <div class='col-sm-10'>
+    <input value='[[[ echo htmlentities(str_replace('\'', '\"', $prepopulate)) ]]]' type='email' class='form-control' id='$this->name' name='$this->name'".($this->required ? ' required' : '').($this->size ? ' size='.$this->size : '')." />
+  </div>
 </div>
 <div class='form-group'>
-  <label for='retype_$this->name'>[[[ echo i18n(array('en' => 'Retype', 'zh' => '再输一次')) ]]] $this->name</label>
-  <input value='[[[ echo htmlentities(str_replace('\'', '\"', $prepopulate_retype)) ]]]' type='email' class='form-control' id='retype_$this->name' name='retype_$this->name'".($this->required ? ' required' : '').($this->size ? ' size='.$this->size : '')." />
+  <label class='col-sm-2 control-label' for='retype_$this->name'>[[[ echo i18n(array('en' => 'Retype', 'zh' => '再输一次')) ]]] $this->name ".($this->required ? $this->mandatory_field : '')."</label>
+  <div class='col-sm-10'>
+    <input value='[[[ echo htmlentities(str_replace('\'', '\"', $prepopulate_retype)) ]]]' type='email' class='form-control' id='retype_$this->name' name='retype_$this->name'".($this->required ? ' required' : '').($this->size ? ' size='.$this->size : '')." />
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 ";
     return $rtn;
   }

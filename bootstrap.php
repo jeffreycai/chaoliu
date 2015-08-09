@@ -18,8 +18,9 @@ if (isset($custom_modules)) {
       'site',
       'siteuser',
       'siteuser_profile',
+      'client',
       'mail',
-
+      
   );
 
 }

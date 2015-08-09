@@ -22,10 +22,13 @@ class FormWidgetCheckboxMultiple extends FormWidget {
     $rtn = "\n       [[[ \$items = (\$object->isNew() ? (isset(\$_POST['$this->name']) ? explode(';', \$_POST['$this->name']) : '') : explode(';', \$object->get". format_as_class_name($this->name)."() )) ]]]";
     $rtn .=
 "\n<div class='form-group'>
-  <label>$this->name</label>
+  <label class='col-sm-2 control-label'>$this->name ".($this->required ? $this->mandatory_field : '')."</label>
+  <div class='col-sm-10'>
     <div class='checkbox'>$options
     </div>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 ";
     return $rtn;
   }

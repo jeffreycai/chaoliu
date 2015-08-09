@@ -20,16 +20,27 @@
           
         [[[ echo Message::renderMessages(); ]]]
           
-<form role="form" method="POST" action="[[[ echo uri('admin/<?php echo $model ?>/create') ]]]">
+<form class="form-horizontal" role="form" method="POST" action="[[[ echo uri('admin/<?php echo $model ?>/create') ]]]">
 <?php foreach ($form_fields as $field => $settings): $widget = new $settings['widget_class']($field, $settings['widget_conf']); ?>
   <?php echo $widget->render($module, $model); ?>
 <?php endforeach; ?>
 
-  <input type="submit" name="submit" value="[[[ i18n_echo(array(
-      'en' => 'Create', 
-      'zh' => '创建'
-  )) ]]]" class="btn btn-default">
+  <div id="form-field-notice" class="form-group">
+    <div class="col-sm-10 col-sm-push-2">
+      <small><i>
+     <span style="color: rgb(185,2,0); font-weight: bold;">*</span> 标记为必填项
+      </i></small>
+    </div>
+  </div>
+  
+  <div class="col-sm-10 col-sm-push-2">
+    <input type="submit" name="submit" value="[[[ i18n_echo(array(
+        'en' => 'Create', 
+        'zh' => '创建'
+    )) ]]]" class="btn btn-primary">
+  </div>
 </form>
+<div class="clearfix"></div>
           
         </div>
       </div>

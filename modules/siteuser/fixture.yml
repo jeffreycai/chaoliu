@@ -64,6 +64,12 @@ site_permission:
   3:
     id: 3
     name: '管理用户权限'
+  4:
+    id: 4
+    name: '管理自己的客户'
+  5:
+    id: 5
+    name: '管理所有客户'
 
     
 site_role:
@@ -110,30 +116,42 @@ site_user_role:
     
 site_permission_role:
   经理:
-    id: 1
+    id: 10
     permission_id: 1
     role_id: 1
   经理_:
-    id: 2
+    id: 11
     permission_id: 2
     role_id: 1
+  经理__:
+    id: 12
+    permission_id: 4
+    role_id: 1
+  经理___:
+    id: 13
+    permission_id: 5
+    role_id: 1
   职员:
-    id: 3
+    id: 2
     permission_id: 1
     role_id: 2
+  职员_:
+    id: 21
+    permission_id: 4
+    role_id: 2
   财务:
-    id: 4
+    id: 3
     permission_id: 1
     role_id: 3
   系统管理员:
-    id: 5
+    id: 4
     permission_id: 1
     role_id: 4
   系统管理员_:
-    id: 6
+    id: 41
     permission_id: 2
     role_id: 4
   系统管理员__:
-    id: 7
+    id: 42
     permission_id: 3
     role_id: 4

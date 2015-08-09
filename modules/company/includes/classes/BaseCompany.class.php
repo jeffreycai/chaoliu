@@ -84,7 +84,7 @@ COLLATE = utf8_general_ci;
   
   static function findAll() {
     global $mysqli;
-    $query = "SELECT * FROM company ORDER BY id";
+    $query = "SELECT * FROM company";
     $result = $mysqli->query($query);
     
     $rtn = array();

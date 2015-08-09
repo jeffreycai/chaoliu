@@ -129,8 +129,8 @@ INDEX `fk-site_user-company_id-idx` (`company_id` ASC),
 CONSTRAINT `fk-site_user-company_id`
   FOREIGN KEY (`company_id`)
   REFERENCES `company` (`id`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE)
+  ON DELETE SET NULL 
+  ON UPDATE SET NULL)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;

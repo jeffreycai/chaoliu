@@ -18,9 +18,12 @@ class FormWidgetTextarea extends FormWidget {
     $prepopulate = '($object->isNew() ? ' . "(isset(\$_POST['$this->name']) ? htmlentities(\$_POST['$this->name']) : '')" . ' : htmlentities($object->get' . format_as_class_name($this->name) . '()))';
     $rtn .=
 "\n<div class='form-group'>
-  <label for='$this->name'>$this->name</label>
-  <textarea class='form-control' rows='5' id='$this->name' name='$this->name'".($this->required ? ' required' : '').">[[[ echo $prepopulate ]]]</textarea>
+  <label class='col-sm-2 control-label' for='$this->name'>$this->name ".($this->required ? $this->mandatory_field : '')."</label>
+  <div class='col-sm-10'>
+    <textarea class='form-control' rows='5' id='$this->name' name='$this->name'".($this->required ? ' required' : '').">[[[ echo $prepopulate ]]]</textarea>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 ";
 
     // ckeditor

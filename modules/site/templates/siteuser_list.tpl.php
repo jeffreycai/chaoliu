@@ -32,7 +32,7 @@
                 <td><?php echo $user->getCreatedAt('Y-m-d H:i:s') ?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="<?php echo uri('siteuser/edit/' . $user->getId()) ?>" class="btn btn-xs btn-success"><span class="fa fa-paste"></span> 编辑</a>
+                    <a href="<?php echo uri('siteuser/edit/' . $user->getId()) ?>" class="btn btn-xs btn-primary"><span class="fa fa-paste"></span> 编辑</a>
                     <a href="<?php echo uri('siteuser/delete/' . $user->getId()) ?>" data-name="<?php echo $user->getProfile()->getNickname() ?>" data-uid="<?php echo $user->getId() ?>" class="btn btn-xs btn-danger delete"><span class="fa fa-times"></span> 删除</a>
                   </div>
                 </td>

@@ -18,9 +18,12 @@ class FormWidgetText extends FormWidget {
     $prepopulate = '($object->isNew() ? ' . "(isset(\$_POST['$this->name']) ? strip_tags(\$_POST['$this->name']) : '')" . ' : $object->get' . format_as_class_name($this->name) . '())';
     $rtn .=
 "\n<div class='form-group'>
-  <label for='$this->name'>$this->name</label>
-  <input value='[[[ echo htmlentities(str_replace('\'', '\"', $prepopulate)) ]]]' type='text' class='form-control' id='$this->name' name='$this->name'".($this->required ? ' required' : '').($this->size ? ' size='.$this->size : '')." />
+  <label class='col-sm-2 control-label' for='$this->name'>$this->name ".($this->required ? $this->mandatory_field : '')."</label>
+  <div class='col-sm-10'>
+    <input value='[[[ echo htmlentities(str_replace('\'', '\"', $prepopulate)) ]]]' type='text' class='form-control' id='$this->name' name='$this->name'".($this->required ? ' required' : '').($this->size ? ' size='.$this->size : '')." />
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 ";
     return $rtn;
   }

@@ -26,12 +26,23 @@
           IN+
         </div>
       </li>
+      
       <?php if ($user->hasPermission('管理本公司用户')): $current_url = get_cur_page_url();?>
       <li <?php echo_link_active_class('/^siteuser/', $current_url) ?>>
         <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse">
           <li <?php echo_link_active_class('/^siteuser\/list/', $current_url) ?>><a href="<?php echo uri('siteuser/list') ?>">所有本公司用户</a></li>
           <li <?php echo_link_active_class('/^siteuser\/add/', $current_url) ?>><a href="<?php echo uri('siteuser/add') ?>">添加新用户</a></li>
+        </ul>
+      </li>
+      <?php endif; ?>
+      
+      <?php if ($user->hasPermission('管理自己的客户')): ?>
+      <li <?php echo_link_active_class('/^client/', $current_url) ?>>
+        <a href="#"><i class="fa fa-users"></i> <span class="nav-label">客户管理</span> <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+          <li <?php echo_link_active_class('/^client\/list/', $current_url) ?>><a href="<?php echo uri('client/list') ?>">列表</a></li>
+          <li <?php echo_link_active_class('/^client\/add/', $current_url) ?>><a href="<?php echo uri('client/add') ?>">添加新客户</a></li>
         </ul>
       </li>
       <?php endif; ?>

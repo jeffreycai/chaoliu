@@ -26,11 +26,14 @@ class FormWidgetImage extends FormWidget {
     $rtn = "";
     $rtn .=
 "\n<div class='form-group' id='$this->name'>
-  <label>$this->name</label>
-  <textarea name='$this->name' style='display: none;'></textarea>
-  <div class='file-fields'" . ($this->multiple ? " style='border: 1px solid #999; padding: 6px;'" : "") . "></div>
+  <label class='col-sm-2 control-label'>$this->name ".($this->required ? $this->mandatory_field : '')."</label>
+  <div class='col-sm-10'>
+    <textarea name='$this->name' style='display: none;'></textarea>
+    <div class='file-fields'" . ($this->multiple ? " style='border: 1px solid #999; padding: 6px;'" : "") . "></div>
 " . ($this->multiple ? "  <button style='margin-top:6px;' class='add btn btn-primary btn-sm' type='button'>[[[ echo i18n(array('en' => 'Add image', 'zh' => '添加图片')) ]]]</button>" : "") . "
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 ";
     $rtn .= "
 [[[

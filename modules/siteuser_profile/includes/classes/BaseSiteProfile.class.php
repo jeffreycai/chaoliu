@@ -81,7 +81,7 @@ INDEX `fk-site_profile-user_id-idx` (`user_id` ASC),
 CONSTRAINT `fk-site_profile-user_id`
   FOREIGN KEY (`user_id`)
   REFERENCES `site_user` (`id`)
-  ON DELETE CASCADE
+  ON DELETE CASCADE 
   ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

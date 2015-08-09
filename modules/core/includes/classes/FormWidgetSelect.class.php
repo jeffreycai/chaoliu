@@ -23,10 +23,13 @@ class FormWidgetSelect extends FormWidget {
     $rtn = "";
     $rtn .=
 "\n<div class='form-group'>
-  <label>$this->name</label>
+  <label class='col-sm-2 control-label'>$this->name ".($this->required ? $this->mandatory_field : '')."</label>
+  <div class='col-sm-10'>
     <select class='form-control' id='$this->name' name='$this->name'>$options
     </select>
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 ";
     return $rtn;
   }

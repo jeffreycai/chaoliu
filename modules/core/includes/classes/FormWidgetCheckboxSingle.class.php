@@ -13,11 +13,15 @@ class FormWidgetCheckboxSingle extends FormWidget {
     $rtn = "";
     $checked = '($object->isNew() ? ' . "(isset(\$_POST['$this->name']) ? (\$_POST['$this->name'] ? 'checked=\"checked\"' : '') : '')" . ' : ($object->get' . format_as_class_name($this->name) . '() ? "checked=\'checked\'" : ""))';
     $rtn .=
-"\n<div class='checkbox'>
-  <label>
-    <input type='checkbox' [[[ echo $checked ]]] id='$this->name' name='$this->name' value='1' /> $this->name
+"\n<div class='form-group'>
+  <label class='col-sm-2 control-label'>
+    $this->name
   </label>
+  <div class='col-sm-10'>
+    <input type='checkbox' [[[ echo $checked ]]] id='$this->name' name='$this->name' value='1' />
+  </div>
 </div>
+<div class='hr-line-dashed'></div>
 ";
     return $rtn;
   }
