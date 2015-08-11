@@ -53,6 +53,15 @@ site_user:
     ## password: cuicui
     password: dcbaf7c8328a9fbff0dc4337868071e5
     created_at: 1426550854
+  10:
+    id: 10
+    username: 'cui'
+    company_id: 1
+    email: 'g.e.o.r.g.e.@ct21.com.au'
+    salt: 5uwbGhkkEnj9a3vt
+    ## password: cuicui
+    password: dcbaf7c8328a9fbff0dc4337868071e5
+    created_at: 1426550854
   
 site_permission:
   1:
@@ -112,6 +121,10 @@ site_user_role:
     id: 6
     user_id: 6
     role_id: 3
+  10:
+    id: 10
+    user_id: 10
+    role_id: 4
     
     
 site_permission_role:
@@ -126,10 +139,6 @@ site_permission_role:
   经理__:
     id: 12
     permission_id: 4
-    role_id: 1
-  经理___:
-    id: 13
-    permission_id: 5
     role_id: 1
   职员:
     id: 2
@@ -155,3 +164,13 @@ site_permission_role:
     id: 42
     permission_id: 3
     role_id: 4
+  系统管理员___:
+    id: 43
+    permission_id: 4
+    role_id: 4 
+  系统管理员____:
+    id: 44
+    permission_id: 5
+    role_id: 4
+    
+  

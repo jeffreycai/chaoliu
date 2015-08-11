@@ -11,6 +11,7 @@
           </div>
         </div>
         <div class="ibox-content">
+          <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
@@ -33,13 +34,16 @@
                 <td>
                   <div class="btn-group" role="group">
                     <a href="<?php echo uri('siteuser/edit/' . $user->getId()) ?>" class="btn btn-xs btn-primary"><span class="fa fa-paste"></span> 编辑</a>
+                    <?php if (has_permission('管理所有客户')): ?>
                     <a href="<?php echo uri('siteuser/delete/' . $user->getId()) ?>" data-name="<?php echo $user->getProfile()->getNickname() ?>" data-uid="<?php echo $user->getId() ?>" class="btn btn-xs btn-danger delete"><span class="fa fa-times"></span> 删除</a>
+                    <?php endif; ?>
                   </div>
                 </td>
               </tr>
 <?php endforeach; ?>
             </tbody>
           </table>
+          </div>
           <div class="clearfix"></div>
         </div>
       </div>
@@ -54,14 +58,14 @@
     var row = $(this).parents('tr').first();
     var answer = swal({
         title: "删除用户",
-        text: "你即将删除用户 \"" + name + "\" 极其所有信息",
+        text: "你即将删除用户 \"" + name + "\" 及其所有信息",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "是的，我确定删除!",
         closeOnConfirm: false
     }, function(){
-      $.post('<?php echo uri('siteuser/delete') ?>/'+uid, 'uid='+uid, function(data){
+      $.post('<?php echo uri('siteuser/delete') ?>/'+uid, function(data){
         if (data.status == 'success') {
           row.fadeOut();
           swal("已删除!", "该用户已成功删除.", "success");

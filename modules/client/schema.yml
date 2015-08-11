@@ -1,12 +1,15 @@
+#########
+## client
+#########
 client:
   pk: id
   fields:
     id: INT NOT NULL AUTO_INCREMENT
     user_id: INT
-    type: INT
+    type: TINYINT
     name: VARCHAR(24) NOT NULL
     dob: INT
-    xueli: VARCHAR(12)
+    xueli: TINYINT
     yasichengji: VARCHAR(3)
     dianhua: VARCHAR(20)
     dizhi: VARCHAR(512)
@@ -41,6 +44,12 @@ client:
         widget: text
         widget_conf:
           required: 1
+      dob:
+        widget: datepicker
+        widget_conf:
+          required: 0
+          format: yy/mm/dd
+          
       chushengriqi:
         widget: text
         widget_conf:
@@ -89,6 +98,8 @@ client:
           required: 1
           size: 30
       keyuan:
+        widget: select
+        widget_conf:
           required: 0
           options:
             0: -- 请选择 --
@@ -103,3 +114,42 @@ client:
     names:
       en: Client
       zh: 客户
+      
+document:
+  pk: id
+  fields:
+    id: INT NOT NULL AUTO_INCREMENT
+    client_id: INT
+    type: VARCHAR(4)
+    name: VARCHAR(255)
+    uri: VARCHAR(255)
+  fks:
+    client_id:
+      foreign_key: client_id
+      references: client.id
+      on_delete: CASCADE
+      on_update: CASCADE
+
+###############
+### Institution
+###############
+#institution:
+#  pk: id
+#  fields:
+#    id: INT NOT NULL AUTO_INCREMENT
+#    name: VARCHAR(256) NOT NULL
+#    commission_rate: FLOAT(2,2)
+#
+##########
+### Course
+##########
+#course:
+#  pk: id
+#  fields:
+#    id: INT NOT NULL AUTO_INCREMENT
+#    user_id: INT
+#    institution_id: INT
+#    stage: VARCHAR(128)
+#    name: VARCHAR(256) NOT NULL
+#    commission_rate: FLOAT(2,2)
+    

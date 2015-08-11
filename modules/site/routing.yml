@@ -9,6 +9,11 @@ routing:
     isSecure: 0
     i18n: 0
     controller: site/profile
+  permission:
+    path: ^\/siteuser\/permission\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/siteuser_permission
   siteuser_list:
     path: ^\/siteuser\/list\/?$
     isSecure: 0
@@ -44,6 +49,11 @@ routing:
     isSecure: 0
     i18n: 0
     controller: site/client_edit
+  client_delete:
+    path: ^\/client\/delete\/(\d+)\/?$
+    isSecure: 0
+    i18n: 0
+    controller: site/client_delete
   client_details:
     path: ^\/client\/details\/(\d+)\/?$
     isSecure: 0

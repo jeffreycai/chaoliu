@@ -1,0 +1,7 @@
+userlog:
+  pk: id
+  fields:
+    id: INT NOT NULL AUTO_INCREMENT
+    user_id: VARCHAR(24) NOT NULL UNIQUE
+    content: VARCHAR(1024)
+    timestamp: INT

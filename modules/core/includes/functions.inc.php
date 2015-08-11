@@ -422,10 +422,11 @@ function load_fixture($module, $fixture_file = 'fixture.yml') {
 }
 
 /**
- * Import module fixture.yml
+ * Import module fixture.yml and fixture.php
  */
 function import_fixture($module) {
   $module_path = MODULESROOT . DS . $module;
+  // import fixture.yml
   if (is_file($module_path . DS . 'fixture.yml')) {
     $fixtures = load_fixture($module, 'fixture.yml');
     $console_db_file_content = "<?php";
@@ -446,6 +447,11 @@ function import_fixture($module) {
         }
       }
     }
+  }
+  // import fixture.php
+  if (is_file($module_path . DS . 'fixture.php')) {
+    echo " - run fixture.php script for module $module\n";
+    require_once $module_path . DS . 'fixture.php';
   }
 }
 

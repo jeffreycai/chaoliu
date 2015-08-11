@@ -36,3 +36,15 @@ function goback() {
   window.history.back();
   return false;
 }
+
+// function to dynamicly load css
+function loadCSS(filename) {
+
+  var file = document.createElement("link")
+  file.setAttribute("rel", "stylesheet")
+  file.setAttribute("type", "text/css")
+  file.setAttribute("href", filename)
+
+  if (typeof file !== "undefined")
+    document.head.appendChild(file)
+}

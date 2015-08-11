@@ -7,7 +7,9 @@
           </span>
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo $user->getProfile()->getNickname() ?></strong>
-              </span> <span class="text-muted text-xs block"><?php 
+              </span> <span class="text-muted text-xs block">
+              <?php echo $user->getCompany(); ?> -   
+              <?php 
               $roles = array();
               foreach ($user->getRoles() as $role) {
                 $roles[] = $role->getName();
@@ -23,7 +25,7 @@
           </ul>
         </div>
         <div class="logo-element">
-          IN+
+          ct21
         </div>
       </li>
       
@@ -33,6 +35,9 @@
         <ul class="nav nav-second-level collapse">
           <li <?php echo_link_active_class('/^siteuser\/list/', $current_url) ?>><a href="<?php echo uri('siteuser/list') ?>">所有本公司用户</a></li>
           <li <?php echo_link_active_class('/^siteuser\/add/', $current_url) ?>><a href="<?php echo uri('siteuser/add') ?>">添加新用户</a></li>
+          <?php if ($user->hasPermission('管理用户权限')): ?>
+          <li <?php echo_link_active_class('/^siteuser\/permission/', $current_url) ?>><a href="<?php echo uri('siteuser/permission') ?>">管理用户权限</a></li>
+          <?php endif; ?>
         </ul>
       </li>
       <?php endif; ?>

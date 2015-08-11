@@ -85,17 +85,17 @@ assets:
 #        source: //ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js
       bootstrap:
         path: .?
-        position: bottom
+        position: top
         weight: 30
         source: //netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js
       metisMenu:
         path: .?
-        position: bottom
+        position: top
         weight: 40
         source: core/assets/js/metisMenu/jquery.metisMenu.js
       backend:
         path: .?
-        position: bottom
+        position: top
         weight: 50
         source: core/assets/js/backend.js
 #      ckeditor:

@@ -24,6 +24,8 @@ if (isset($_POST['submit'])) {
     $error_flag = true;
   }
   
+  // validation for $dob
+  $dob = isset($_POST["dob"]) ? strip_tags($_POST["dob"]) : null;  
   // validation for $chushengriqi
   $chushengriqi = isset($_POST["chushengriqi"]) ? strip_tags($_POST["chushengriqi"]) : null;  
   // validation for $xueli
@@ -61,7 +63,9 @@ if (isset($_POST['submit'])) {
     Message::register(new Message(Message::DANGER, i18n(array("en" => "Retype value does not match for email", "zh" => "再次输入的email与原值不匹配"))));
     $error_flag = true;
   }
-    
+  
+  // validation for $keyuan
+  $keyuan = isset($_POST["keyuan"]) ? strip_tags($_POST["keyuan"]) : null;  
   // validation for $beizhu
   $beizhu = isset($_POST["beizhu"]) ? $_POST["beizhu"] : null;  /// proceed submission
   
@@ -77,6 +81,9 @@ if (isset($_POST['submit'])) {
   
   // proceed for $name
   $object->setName($name);
+  
+  // proceed for $dob
+  $object->setDob($dob);
   
   // proceed for $chushengriqi
   $object->setChushengriqi($chushengriqi);
@@ -99,7 +106,12 @@ if (isset($_POST['submit'])) {
   
   // proceed for $email
   $object->setEmail($email);
-    
+  
+  // proceed for $keyuan
+  if (!empty($keyuan)) {
+    $object->setKeyuan($keyuan);
+  }
+  
   // proceed for $beizhu
   $object->setBeizhu($beizhu);
   if ($error_flag == false) {

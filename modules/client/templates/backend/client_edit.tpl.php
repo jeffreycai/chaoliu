@@ -52,6 +52,31 @@
 </div>
 <div class='hr-line-dashed'></div>
   
+<div id='DOMGH' class='form-group'>
+  <label class='col-sm-2 control-label' for='dob'>dob </label>
+  <div class='col-sm-10'>
+    <div class='input-group'>
+      <span class='input-group-addon'><i class='fa fa-calendar'></i></span><input value='<?php echo htmlentities(str_replace('\'', '"', ($object->isNew() ? (isset($_POST['dob']) ? strip_tags($_POST['dob']) : '') : $object->getDob()))) ?>' type='text' class='form-control' id='dob' name='dob' />
+    </div>
+  </div>
+</div>
+<div class='hr-line-dashed'></div>
+
+<?php  // include jquery-ui library if not
+    $already_included_at_frontend = Asset::checkAssetAdded('jquery-ui', 'js', 'frontend') || Asset::checkAssetAdded('jquery_ui', 'js', 'frontend');
+    if (!$already_included_at_frontend) {
+      echo( "\n".'<script type="text/javascript" src="'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'"></script>'."\n" );
+      echo( "\n".'<script type="text/javascript">loadCSS("'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'")</script>'."\n" );
+      Asset::addDynamicAsset('jquery_ui', 'js', 'frontend', '<script type="text/javascript" src="'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'"></script>');
+    }
+    $already_included_at_backend = Asset::checkAssetAdded('jquery-ui', 'js', 'backend') || Asset::checkAssetAdded('jquery_ui', 'js', 'backend');
+    if (!$already_included_at_backend) {
+      echo( "\n".'<script type="text/javascript" src="'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'"></script>'."\n" );
+      echo( "\n".'<script type="text/javascript">loadCSS("'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'")</script>'."\n" );
+      Asset::addDynamicAsset('jquery_ui', 'js', 'backend', '<script type="text/javascript" src="'.uri('modules/core/assets/jquery-ui-1.11.4.custom/jquery-ui.min.js').'"></script>');
+    }
+?>
+  
 <div class='form-group'>
   <label class='col-sm-2 control-label' for='chushengriqi'>chushengriqi </label>
   <div class='col-sm-10'>
@@ -127,7 +152,21 @@
   </div>
 </div>
 <div class='hr-line-dashed'></div>
-    
+  
+<div class='form-group'>
+  <label class='col-sm-2 control-label'>keyuan </label>
+  <div class='col-sm-10'>
+    <select class='form-control' id='keyuan' name='keyuan'>
+      <option value='0' <?php echo ($object->isNew() ? (isset($_POST['keyuan']) ? ($_POST['keyuan'] == '0' ? 'selected="selected"' : '') : '') : ($object->getKeyuan() == "0" ? "selected='selected'" : "")) ?>>-- 请选择 --</option>
+      <option value='熟人推荐' <?php echo ($object->isNew() ? (isset($_POST['keyuan']) ? ($_POST['keyuan'] == '熟人推荐' ? 'selected="selected"' : '') : '') : ($object->getKeyuan() == "熟人推荐" ? "selected='selected'" : "")) ?>>熟人推荐</option>
+      <option value='国内中介' <?php echo ($object->isNew() ? (isset($_POST['keyuan']) ? ($_POST['keyuan'] == '国内中介' ? 'selected="selected"' : '') : '') : ($object->getKeyuan() == "国内中介" ? "selected='selected'" : "")) ?>>国内中介</option>
+      <option value='网络' <?php echo ($object->isNew() ? (isset($_POST['keyuan']) ? ($_POST['keyuan'] == '网络' ? 'selected="selected"' : '') : '') : ($object->getKeyuan() == "网络" ? "selected='selected'" : "")) ?>>网络</option>
+      <option value='广告宣传' <?php echo ($object->isNew() ? (isset($_POST['keyuan']) ? ($_POST['keyuan'] == '广告宣传' ? 'selected="selected"' : '') : '') : ($object->getKeyuan() == "广告宣传" ? "selected='selected'" : "")) ?>>广告宣传</option>
+    </select>
+  </div>
+</div>
+<div class='hr-line-dashed'></div>
+  
 <div class='form-group'>
   <label class='col-sm-2 control-label' for='beizhu'>beizhu </label>
   <div class='col-sm-10'>

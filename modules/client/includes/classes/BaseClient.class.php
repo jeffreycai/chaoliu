@@ -136,10 +136,10 @@ class BaseClient extends DBObject {
 CREATE TABLE IF NOT EXISTS `client` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `user_id` INT ,
-  `type` INT ,
+  `type` TINYINT ,
   `name` VARCHAR(24) NOT NULL ,
   `dob` INT ,
-  `xueli` VARCHAR(12) ,
+  `xueli` TINYINT ,
   `yasichengji` VARCHAR(3) ,
   `dianhua` VARCHAR(20) ,
   `dizhi` VARCHAR(512) ,
