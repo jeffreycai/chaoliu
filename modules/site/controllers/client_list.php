@@ -30,11 +30,11 @@ $html->renderOut('site/components/page_header', array(
     )
 ));
 $perpage = 50;
-$total = Client::countAll();
+$total = has_permission('管理所有客户') ? Client::countAll() : Client::countAll($myuser->getCompanyId());
 $total_page = ceil($total / $perpage);
 $html->renderOut('site/client_list', array(
     'user' => $myuser,
-    'objects' => has_permission('管理所有客户') ? Client::findAllWithPage($page, $perpage) : (has_permission('管理本公司用户') ? Client::findAllWithPage($page, $perpage, $myuser->getCompanyId()) : array()),
+    'objects' => has_permission('管理所有客户') ? Client::findAllWithPage($page, $perpage) : Client::findAllWithPage($page, $perpage, $myuser->getCompanyId()),
     'current_page' => $page,
     'total_page' => $total_page,
     'total' => $total,
